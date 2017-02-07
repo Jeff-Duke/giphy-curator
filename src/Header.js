@@ -20,20 +20,21 @@ export default class Header extends Component {
 
   render() {
     const { searchTerm, resultCount, rating } = this.state;
+    const { userFeedback, errorMessage } = this.props;
     return(
-      <section className="Header">
+      <section className='Header'>
         <form>
-          <label htmlFor="search">  Search for a Giphy:
-            <input className="SearchInput"
-                    type="text"
-                    name="search"
-                    placeholder="Search for a Giphy"
-                    label="Search for a giphy"
+          <label htmlFor='search'>  Search for a Giphy:
+            <input className='SearchInput'
+                    type='text'
+                    name='search'
+                    placeholder='Search for a Giphy'
+                    label='Search for a giphy'
                     onChange={(e) => this.setState({ searchTerm: e.target.value }) }
             />
           </label>
-          <button type="submit"
-            children="Search"
+          <button type='submit'
+            children='Search'
             disabled={!searchTerm}
             onClick={(e) => {
               e.preventDefault();
@@ -41,25 +42,27 @@ export default class Header extends Component {
             }}
           />
         </form>
-        <label htmlFor="result-count">  Number of results (max: 100):
-            <input className="ResultCount"
-                  type="number"
-                  name="result-count"
-                  min="0"
-                  max="100"
+        <label htmlFor='result-count'>  Number of results (max: 100):
+            <input className='ResultCount'
+                  type='number'
+                  name='result-count'
+                  min='0'
+                  max='100'
                   value={resultCount}
                   onChange={(e) => this.setState({ resultCount: e.target.value })}
             />
         </label>
-        <label htmlFor="rating-picker"> Giphy Rating:
-          <select name="rating-picker" id="rating-picker" value={rating} onChange={(e) => this.setState({ rating: e.target.value })}>
-            <option value="y">Y</option>
-            <option value="g">G</option>
-            <option value="pg">PG</option>
-            <option value="pg-13">PG-13</option>
-            <option value="r">R</option>
+        <label htmlFor='rating-picker'> Giphy Rating:
+          <select name='rating-picker' id='rating-picker' value={rating} onChange={(e) => this.setState({ rating: e.target.value })}>
+            <option value='y'>Y</option>
+            <option value='g'>G</option>
+            <option value='pg'>PG</option>
+            <option value='pg-13'>PG-13</option>
+            <option value='r'>R</option>
           </select>
         </label>
+        <p className='HeaderError'>{ errorMessage }</p>
+        <p className='HeaderFeedback'>{ userFeedback }</p>
       </section>
     )
   }

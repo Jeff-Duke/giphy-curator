@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Header from './Header';
 
-class App extends Component {
+export default class App extends Component {
   constructor() {
     super();
     this.state = {
@@ -25,7 +25,7 @@ fetchGiphy(queryUrl) {
 
 giveUserFeedback(feedback) {
   this.setState({ userFeedback: feedback });
-  setTimeout(() => { this.setState({ userFeedback: null }); }, 500);
+  setTimeout(() => { this.setState({ userFeedback: null }); }, 1000);
 }
 
 displayAnError(error) {
@@ -41,30 +41,27 @@ copyGiphyUrl(giphyUrl) {
   textField.select();
   document.execCommand('copy');
   textField.remove();
-  this.giveUserFeedback('copied to clipboard');
+  this.giveUserFeedback('Link copied to clipboard');
 }
 
   render() {
     const { giphySearchResults, errorMessage, userFeedback } = this.state;
     return (
-      <section className="App">
-      <Header handleSubmit={(queryUrl) => this.fetchGiphy(queryUrl)}/>
-
-          <p>{ userFeedback }</p>
-
-          <p>{ errorMessage }</p>
-
-          {giphySearchResults && giphySearchResults.map(giphy => {
-            return <img key={giphy.id}
-                        role="presentation"
-                        src={giphy.images.fixed_height.url}
-                        onClick={(e) => this.copyGiphyUrl(e.target.src)}
-                    />;
-            })
-          }
+      <section className='App'>
+      <Header handleSubmit={(queryUrl) => this.fetchGiphy(queryUrl)}
+              errorMessage={errorMessage}
+              userFeedback={userFeedback}
+      />
+      {giphySearchResults && giphySearchResults.map(giphy => {
+        return <img key={giphy.id}
+                    role='presentation'
+                    src={giphy.images.fixed_height.url}
+                    onClick={(e) => this.copyGiphyUrl(e.target.src)}
+                />;
+        })
+      }
       </section>
     );
   }
 }
 
-export default App;
