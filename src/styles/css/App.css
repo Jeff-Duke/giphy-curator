@@ -12,6 +12,8 @@
   background: none;
   max-width: 320px;
   padding: 10px; }
+  .Giphy:hover {
+    cursor: pointer; }
   @media screen and (min-width: 400px) {
     .Giphy {
       max-width: 100%; } }
