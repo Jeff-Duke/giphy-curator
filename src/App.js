@@ -8,12 +8,14 @@ class App extends Component {
       errorMessage: null,
       searchTerm: null,
       userFeedback: null,
+      resultCount: 5,
     };
   }
 
 fetchGiphy(searchTerm) {
+  const resultCount = this.state.resultCount;
   const apiKey = 'dc6zaTOxFJmzC';
-  const queryUrl = `http://api.giphy.com/v1/gifs/search?q=${searchTerm}&api_key=${apiKey}`;
+  const queryUrl = `http://api.giphy.com/v1/gifs/search?q=${searchTerm}&limit=${resultCount}&api_key=${apiKey}`;
 
   fetch(queryUrl)
     .then(res => res.json())
@@ -46,12 +48,31 @@ copyGiphyUrl(giphyUrl) {
 }
 
   render() {
-    const { errorMessage, userFeedback, giphyResults, searchTerm } = this.state;
+    const { errorMessage, userFeedback, giphyResults, searchTerm, resultCount } = this.state;
     return (
       <section className="App">
       <form>
-        <label htmlFor="search">Search for a Giphy:  </label>
-        <input type="text" name="search" placeholder="Search for a Giphy" label="Search for a giphy" onChange={(e) => this.setState({ searchTerm: e.target.value }) } />
+        <label htmlFor="search">  Search for a Giphy:
+          <input className="SearchInput"
+                  type="text"
+                  name="search"
+                  placeholder="Search for a Giphy"
+                  label="Search for a giphy"
+                  onChange={(e) => this.setState({ searchTerm: e.target.value }) }
+          />
+        </label>
+
+        <label htmlFor="result-count">  Number of results (max: 100):
+          <input className="ResultCount"
+                type="number"
+                name="result-count"
+                min="0"
+                max="100"
+                value={resultCount}
+                onChange={(e) => this.setState({ resultCount: e.target.value })}
+          />
+        </label>
+
         <button type="submit"
           children="Search"
           disabled={!searchTerm}
@@ -59,11 +80,12 @@ copyGiphyUrl(giphyUrl) {
             e.preventDefault();
             errorMessage && this.setState({ errorMessage: null });
             this.fetchGiphy(searchTerm);
-          }} />
+          }} 
+        />
       </form>
-        {userFeedback && <p>{ userFeedback }</p>}
+        <p>{ userFeedback }</p>
 
-        {errorMessage && <p>{ errorMessage } </p>}
+        <p>{ errorMessage } </p>
 
         {giphyResults && giphyResults.map(giphy => {
           return <img key={giphy.id}
