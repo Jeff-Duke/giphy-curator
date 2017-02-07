@@ -12,7 +12,7 @@ class App extends Component {
   }
 
 fetchGiphy(queryUrl) {
-  this.state.errorMessage && this.setState({ errorMessage: null });
+  this.setState({ errorMessage: null });
 
   fetch(queryUrl)
     .then(response => response.json())
@@ -34,7 +34,7 @@ displayAnError(error) {
 }
 
 copyGiphyUrl(giphyUrl) {
-  this.state.userFeedback && this.setState({ userFeedback: null });
+  this.setState({ userFeedback: null });
   const textField = document.createElement('textarea');
   textField.innerText = giphyUrl;
   document.body.appendChild(textField);
