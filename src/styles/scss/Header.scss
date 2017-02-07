@@ -1,0 +1,76 @@
+.Header {
+  background-color: $color-background;
+  display: flex;
+  flex-direction: column;
+  font-family: $font-sans;
+  font-size: 12pt;
+  min-height: 200px;
+  position: fixed;
+  width: 100vw;
+  h1 {
+    border-bottom: 3px solid $color-accent-hot;
+    font-family: $font-serif;
+    font-size: 24pt;
+    margin: 24px 0 24px 0;
+    padding: 10px;
+  }
+  @media screen and (min-width: 350px) {
+    font-size: 16pt
+  }
+  @media screen and (min-width: 475px) {
+    align-items: center;
+    justify-content: center;
+    h1 {
+      font-size: 48pt;
+    }
+  }
+}
+
+.HeaderFeedback, .HeaderError {
+  align-items: center;
+  color: $color-accent-hot;
+  display: flex;
+  justify-content: center;
+  margin-top: 12px;
+  min-height: 40px;
+  padding: 10px;
+  width: 100vw;
+  font-size: 18pt;
+}
+
+input, select {
+  background: #DDD;
+  border: none;
+  border-radius: 3px;
+  font-size: 12pt;
+  margin: 5px;
+  padding: 5px;
+}
+
+label {
+  margin: 5px;
+}
+
+.SearchButton {
+  background-color: $color-accent-cool;
+  border: none;
+  border-radius: 3px;
+  box-shadow: 0 14px 28px rgba(0, 0, 0, .25), 0 10px 10px rgba(0, 0, 0, .22);
+  color: $color-accent-hot;
+  font-size: 16pt;
+  margin: 10px;
+  min-height: 40px;
+  min-width: 80px;
+  &:hover {
+    background: grey;
+  }
+  &:disabled {
+    background: $color-background;
+    border: 1px solid grey;
+    box-shadow: none;
+    color: $color-accent-cool;
+  }
+  &:active {
+    box-shadow: none;
+  }
+}

@@ -14,7 +14,6 @@ export default class Header extends Component {
   const { searchTerm, resultCount, rating } = this.state;
   const apiKey = 'dc6zaTOxFJmzC';
   const queryUrl = `http://api.giphy.com/v1/gifs/search?q=${searchTerm}&limit=${resultCount}&rating=${rating}&api_key=${apiKey}`;
-
   this.props.handleSubmit(queryUrl);
 }
 
@@ -23,17 +22,20 @@ export default class Header extends Component {
     const { userFeedback, errorMessage } = this.props;
     return(
       <section className='Header'>
-        <form>
-          <label htmlFor='search'>  Search for a Giphy:
-            <input className='SearchInput'
-                    type='text'
-                    name='search'
-                    placeholder='Search for a Giphy'
-                    label='Search for a giphy'
-                    onChange={(e) => this.setState({ searchTerm: e.target.value }) }
+      <h1>Giphy Curator</h1>
+        <form id='SearchInput'>
+          <label htmlFor='search'>  Search for a Giphy
+            <input type='text'
+                   name='search'
+                   className='SearchInput'
+                   placeholder='Search for a Giphy'
+                   label='Search for a giphy'
+                   onChange={(e) => this.setState({ searchTerm: e.target.value }) }
             />
           </label>
+
           <button type='submit'
+            className='SearchButton'
             children='Search'
             disabled={!searchTerm}
             onClick={(e) => {
@@ -42,7 +44,7 @@ export default class Header extends Component {
             }}
           />
         </form>
-        <label htmlFor='result-count'>  Number of results (max: 100):
+        <label htmlFor='result-count'>  Number of results (max: 100)
             <input className='ResultCount'
                   type='number'
                   name='result-count'
@@ -61,8 +63,8 @@ export default class Header extends Component {
             <option value='r'>R</option>
           </select>
         </label>
-        <p className='HeaderError'>{ errorMessage }</p>
         <p className='HeaderFeedback'>{ userFeedback }</p>
+        <p className='HeaderError'>{ errorMessage }</p>
       </section>
     )
   }

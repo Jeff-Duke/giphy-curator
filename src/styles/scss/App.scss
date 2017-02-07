@@ -1,0 +1,19 @@
+.GiphySearchResults {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding-top: 425px;
+  @media screen and (min-width: 450px) {
+    padding-top: 450px;
+  }
+}
+
+.Giphy {
+  background: none;
+  max-width: 320px;
+  padding: 10px;
+  @media screen and (min-width: 400px) {
+    max-width: 100%;
+  }
+}
