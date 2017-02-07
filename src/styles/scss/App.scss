@@ -13,6 +13,9 @@
   background: none;
   max-width: 320px;
   padding: 10px;
+  &:hover {
+    cursor: pointer;
+  }
   @media screen and (min-width: 400px) {
     max-width: 100%;
   }
