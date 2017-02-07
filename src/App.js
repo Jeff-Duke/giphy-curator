@@ -6,13 +6,13 @@ export default class App extends Component {
     super();
     this.state = {
       giphySearchResults: null,
-      errorMessage: null,
-      userFeedback: null,
+      errorMessage: '',
+      userFeedback: '',
     };
   }
 
 fetchGiphy(queryUrl) {
-  this.setState({ errorMessage: null });
+  this.setState({ errorMessage: '' });
 
   fetch(queryUrl)
     .then(response => response.json())
@@ -25,16 +25,16 @@ fetchGiphy(queryUrl) {
 
 giveUserFeedback(feedback) {
   this.setState({ userFeedback: feedback });
-  setTimeout(() => { this.setState({ userFeedback: null }); }, 1000);
+  setTimeout(() => { this.setState({ userFeedback: '' }); }, 1000);
 }
 
 displayAnError(error) {
   this.setState({ errorMessage: error});
-  setTimeout(() => { this.setState({ errorMessage: null }); }, 2000);
+  setTimeout(() => { this.setState({ errorMessage: '' }); }, 2000);
 }
 
 copyGiphyUrl(giphyUrl) {
-  this.setState({ userFeedback: null });
+  this.setState({ userFeedback: '' });
   const textField = document.createElement('textarea');
   textField.innerText = giphyUrl;
   document.body.appendChild(textField);
@@ -48,20 +48,22 @@ copyGiphyUrl(giphyUrl) {
     const { giphySearchResults, errorMessage, userFeedback } = this.state;
     return (
       <section className='App'>
-      <Header handleSubmit={(queryUrl) => this.fetchGiphy(queryUrl)}
-              errorMessage={errorMessage}
-              userFeedback={userFeedback}
-      />
-      {giphySearchResults && giphySearchResults.map(giphy => {
-        return <img key={giphy.id}
-                    role='presentation'
-                    src={giphy.images.fixed_height.url}
-                    onClick={(e) => this.copyGiphyUrl(e.target.src)}
-                />;
-        })
-      }
+        <Header handleSubmit={(queryUrl) => this.fetchGiphy(queryUrl)}
+                errorMessage={errorMessage}
+                userFeedback={userFeedback}
+        />
+        <section className='GiphySearchResults'>
+          {giphySearchResults && giphySearchResults.map(giphy => {
+            return <img key={giphy.id}
+                      className='Giphy'
+                      role='presentation'
+                      src={giphy.images.fixed_height.url}
+                      onClick={(e) => this.copyGiphyUrl(e.target.src)}
+                  />;
+            })
+          }
+        </section>
       </section>
     );
   }
 }
-
